@@ -23,7 +23,7 @@ public class Basedao {
 		Connection conn =null;
 		
 		try{
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/testshop?useSSL=false&serverTimezone=UTC","root","123456");
+			conn = DriverManager.getConnection("jdbc:mysql://cdb-nvpev74d.gz.tencentcdb.com:10078/testshop?useSSL=false&serverTimezone=UTC","root","Ab123123");
 		} catch(SQLException e){
 			e.printStackTrace();
 		}
