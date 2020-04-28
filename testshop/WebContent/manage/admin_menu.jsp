@@ -4,7 +4,7 @@
 
 <html>
 <head>
-    <meta charset="UTF-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>后台管理</title>
     <link rel="stylesheet" type="text/css" href="css/common.css"/>
     <link rel="stylesheet" type="text/css" href="css/main.css"/>
@@ -39,10 +39,10 @@
                     <a href="#"><i class="icon-font">&#xe003;</i>常用操作</a>
                     <ul class="sub-menu">
                         <li><a href="/testshop/manage/admin_douserselect"><i class="icon-font">&#xe008;</i>用户管理</a></li>
-                        <li><a href="admin_shoppingcart.jsp"><i class="icon-font">&#xe005;</i>购物车管理</a></li>
-                        <li><a href="admin_goods.jsp"><i class="icon-font">&#xe006;</i>商品管理</a></li>
+                        <li><a href="/testshop/manage/admin_docartselect"><i class="icon-font">&#xe005;</i>购物车管理</a></li>
+                        <li><a href="/testshop/manage/admin_dogoodsselect"><i class="icon-font">&#xe006;</i>商品管理</a></li>
                         <li><a href="admin_order.jsp"><i class="icon-font">&#xe004;</i>订单管理</a></li>
-                        <li><a href="admin_comment.jsp"><i class="icon-font">&#xe012;</i>评论管理</a></li>
+                        <li><a href="/testshop/manage/admin_docommentselect"><i class="icon-font">&#xe012;</i>评论管理</a></li>
                         <li><a href="admin_sell.jsp"><i class="icon-font">&#xe052;</i>出售管理</a></li>
                         <li><a href="#"><i class="icon-font">&#xe033;</i>xx</a></li>
                     </ul>

@@ -1,5 +1,6 @@
-package com.testshop.servlet.user;
+package com.testshop.servlet.goods;
 
+import java.io.Console;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -9,14 +10,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.testshop.entity.TESTSHOP_USER;
-import com.testshop.service.TESTSHOP_USERDao;
+import com.testshop.entity.TESTSHOP_GOODS;
+import com.testshop.service.TESTSHOP_GOODSDao;
 
 /**
- * Servlet implementation class DoUserSelect
+ * Servlet implementation class DoGoodsSelect
  */
-@WebServlet("/manage/admin_douserselect")
-public class DoUserSelect extends HttpServlet {
+@WebServlet("/manage/admin_dogoodsselect")
+public class DoGoodsSelect extends HttpServlet {
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -25,7 +26,7 @@ public class DoUserSelect extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
+		
 		int cpage = 1;
 		int count = 5;
 
@@ -41,21 +42,21 @@ public class DoUserSelect extends HttpServlet {
 		if (cp != null) {
 			cpage = Integer.parseInt(cp);
 		}
-		int arr[] = TESTSHOP_USERDao.totalPage(count, keywords);
-
+		int arr[] = TESTSHOP_GOODSDao.totalPage(count, keywords);
+		
 		// 获取了所有的用户记录了
-		ArrayList<TESTSHOP_USER> list = TESTSHOP_USERDao.selectAll(cpage, count, keywords);
+		ArrayList<TESTSHOP_GOODS> list = TESTSHOP_GOODSDao.selectAll(cpage, count, keywords);
 
 		// 放到请求对象
-		request.setAttribute("userlist", list);
+		request.setAttribute("goodslist", list);
 		request.setAttribute("tsum", arr[0]);
 		request.setAttribute("tpage", arr[1]);
 		request.setAttribute("cpage", cpage);
-
+		
 		if (keywords != null) {
 			request.setAttribute("search", "&keywords=" + keywords);
 		}
-		request.getRequestDispatcher("admin_user.jsp").forward(request, response);
+		request.getRequestDispatcher("admin_goods.jsp").forward(request, response);
 
 	}
 

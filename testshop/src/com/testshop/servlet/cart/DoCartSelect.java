@@ -1,4 +1,4 @@
-package com.testshop.servlet.user;
+package com.testshop.servlet.cart;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,14 +9,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.testshop.entity.TESTSHOP_USER;
-import com.testshop.service.TESTSHOP_USERDao;
+import com.testshop.entity.TESTSHOP_CART;
+import com.testshop.service.TESTSHOP_CARTDao;
 
 /**
- * Servlet implementation class DoUserSelect
+ * Servlet implementation class DocartSelect
  */
-@WebServlet("/manage/admin_douserselect")
-public class DoUserSelect extends HttpServlet {
+@WebServlet("/manage/admin_docartselect")
+public class DoCartSelect extends HttpServlet {
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -41,13 +41,13 @@ public class DoUserSelect extends HttpServlet {
 		if (cp != null) {
 			cpage = Integer.parseInt(cp);
 		}
-		int arr[] = TESTSHOP_USERDao.totalPage(count, keywords);
+		int arr[] = TESTSHOP_CARTDao.totalPage(count, keywords);
 
 		// 获取了所有的用户记录了
-		ArrayList<TESTSHOP_USER> list = TESTSHOP_USERDao.selectAll(cpage, count, keywords);
+		ArrayList<TESTSHOP_CART> list = TESTSHOP_CARTDao.selectAll(cpage, count, keywords);
 
 		// 放到请求对象
-		request.setAttribute("userlist", list);
+		request.setAttribute("cartlist", list);
 		request.setAttribute("tsum", arr[0]);
 		request.setAttribute("tpage", arr[1]);
 		request.setAttribute("cpage", cpage);
@@ -55,7 +55,7 @@ public class DoUserSelect extends HttpServlet {
 		if (keywords != null) {
 			request.setAttribute("search", "&keywords=" + keywords);
 		}
-		request.getRequestDispatcher("admin_user.jsp").forward(request, response);
+		request.getRequestDispatcher("admin_cart.jsp").forward(request, response);
 
 	}
 

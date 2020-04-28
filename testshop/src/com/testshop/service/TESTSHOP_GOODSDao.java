@@ -7,52 +7,52 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.testshop.dao.Basedao;
-import com.testshop.entity.TESTSHOP_USER;
+import com.testshop.entity.TESTSHOP_GOODS;
+import com.testshop.entity.TESTSHOP_GOODS;
 
-public class TESTSHOP_USERDao {
-	public static int insert(TESTSHOP_USER u) {
-
-		String sql = "insert into user value(?,?,?,?,?,?,?,?,?)";
+public class TESTSHOP_GOODSDao {
+	public static int insert(TESTSHOP_GOODS goods) {
+		String sql = "insert into goods value(?,?,?,?,?,?,?,?,?)";
 
 		Object[] params = { null,
-				u.getUSER_NAME(),
-				u.getUSER_PASSWORD(),
-				u.getUSER_ACCOUNT(),
-				u.getUSER_IDENTITY(),
-				u.getUSER_EMAIL(),
-				u.getUSER_STUNUM(),
-				u.getUSER_ADDRESS(),
-				u.getUSER_ICON() };
+				goods.getGOODS_NAME(),
+				goods.getGOODS_DESC(),
+				goods.getGOODS_IMG(),
+				goods.getGOODS_PRICE(),
+				goods.getGOODS_COUNT(),
+				goods.getGOODS_TYPE(),
+				goods.getUSER_ID(),
+				goods.getUSER_CONTACT() };
 
 		return Basedao.exectuIUD(sql, params);
 	}
 	
-	public static int update(TESTSHOP_USER u) {
+	public static int update(TESTSHOP_GOODS goods) {
 
-		String sql = "update user set USER_NAME=?, USER_PASSWORD=?, USER_ACCOUNT=?, USER_IDENTITY=?, USER_EMAIL=?, USER_STUNUM=?, USER_ADDRESS=?, USER_ICON=? where USER_ID = ?";
+		String sql = "update goods set GOODS_NAME=?, GOODS_DESC=?, GOODS_IMG=?, GOODS_PRICE=?, GOODS_COUNT=?, GOODS_TYPE=?, USER_ID=? ,USER_CONTACT=? where GOODS_ID = ?";
 
 		Object[] params = { 
-				u.getUSER_NAME(),
-				u.getUSER_PASSWORD(),
-				u.getUSER_ACCOUNT(),
-				u.getUSER_IDENTITY(),
-				u.getUSER_EMAIL(),
-				u.getUSER_STUNUM(),
-				u.getUSER_ADDRESS(),
-				u.getUSER_ICON(),
-				u.getUSER_ID()};
+				goods.getGOODS_NAME(),
+				goods.getGOODS_DESC(),
+				goods.getGOODS_IMG(),
+				goods.getGOODS_PRICE(),
+				goods.getGOODS_COUNT(),
+				goods.getGOODS_TYPE(),
+				goods.getUSER_ID(),
+				goods.getUSER_CONTACT(),
+				goods.getGOODS_ID(),};
 
 		return Basedao.exectuIUD(sql, params);
 	}
 	
 	public static int delete(String id) {
-		String sql = "delete from user where USER_ID=?";
+		String sql = "delete from goods where GOODS_ID=?";
 		
 		Object[] params = {id};
 		
 		return Basedao.exectuIUD(sql, params);
 	}
-
+	
 	/**
 	 * 获取总记录数和总页数
 	 * @param count		每页记录数
@@ -67,13 +67,14 @@ public class TESTSHOP_USERDao {
 		ResultSet rs = null;
 
 		try {
+
 			if (keywords != null) {
-				String sql = "select count(*) from user where USER_NAME like ?";
+				String sql = "select count(*) from goods where GOODS_NAME like ?";
 				ps = conn.prepareStatement(sql);
 				ps.setString(1, "%" + keywords + "%");
 
 			} else {
-				String sql = "select count(*) from user";
+				String sql = "select count(*) from goods";
 				ps = conn.prepareStatement(sql);
 			}
 
@@ -100,14 +101,14 @@ public class TESTSHOP_USERDao {
 	}
 	
 	/**
-	 * 通过关键字查找用户列表
+	 * 通过关键字查找商品列表
 	 * @param cpage 当前页数
 	 * @param count 显示个数
 	 * @param keywords 搜索关键字
-	 * @return 返回指定的用户集
+	 * @return 返回指定的商品集
 	 */
-	public static ArrayList<TESTSHOP_USER> selectAll(int cpage, int count, String keywords) {
-		ArrayList<TESTSHOP_USER> list = new ArrayList<TESTSHOP_USER>();
+	public static ArrayList<TESTSHOP_GOODS> selectAll(int cpage, int count, String keywords) {
+		ArrayList<TESTSHOP_GOODS> list = new ArrayList<TESTSHOP_GOODS>();
 		ResultSet rs = null;
 
 		Connection conn = Basedao.getconn();
@@ -116,14 +117,14 @@ public class TESTSHOP_USERDao {
 
 		try {
 			if (keywords != null) {
-				String sql = "select * from user where USER_NAME like ? order by USER_ID asc limit ?, ?";
+				String sql = "select * from goods where GOODS_NAME like ? order by GOODS_ID asc limit ?, ?";
 				ps = conn.prepareStatement(sql);
 				ps.setString(1, "%" + keywords + "%");
 				ps.setInt(2, (cpage - 1) * count);
 				ps.setInt(3, count);
 
 			} else {
-				String sql = "select * from user order by USER_ID asc limit ?, ?";
+				String sql = "select * from goods order by GOODS_ID asc limit ?, ?";
 				ps = conn.prepareStatement(sql);
 				ps.setInt(1, (cpage - 1) * count);
 				ps.setInt(2, count);
@@ -133,18 +134,18 @@ public class TESTSHOP_USERDao {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				TESTSHOP_USER u = new TESTSHOP_USER(
+				TESTSHOP_GOODS goods = new TESTSHOP_GOODS(
+						rs.getString("GOODS_ID"),
+						rs.getString("GOODS_NAME"),
+						rs.getString("GOODS_DESC"),
+						rs.getString("GOODS_IMG"),
+						rs.getString("GOODS_PRICE"),
+						rs.getString("GOODS_COUNT"),
+						rs.getString("GOODS_TYPE"),
 						rs.getString("USER_ID"),
-						rs.getString("USER_NAME"),
-						rs.getString("USER_PASSWORD"),
-						rs.getString("USER_ACCOUNT"),
-						rs.getString("USER_IDENTITY"),
-						rs.getString("USER_EMAIL"),
-						rs.getString("USER_STUNUM"),
-						rs.getString("USER_ADDRESS"),
-						rs.getString("USER_ICON")
+						rs.getString("USER_CONTACT")
 				);
-				list.add(u);
+				list.add(goods);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -156,12 +157,12 @@ public class TESTSHOP_USERDao {
 	}
 	
 	/**
-	 * 通过ID查找用户
+	 * 通过ID查找商品
 	 * @param id 指定ID
-	 * @return 返回用户实体
+	 * @return 返回商品实体
 	 */
-	public static TESTSHOP_USER selectByID(String id) {
-		TESTSHOP_USER u = null;
+	public static TESTSHOP_GOODS selectByID(String id) {
+		TESTSHOP_GOODS goods = null;
 		ResultSet rs = null;
 
 		Connection conn = Basedao.getconn();
@@ -169,7 +170,7 @@ public class TESTSHOP_USERDao {
 		PreparedStatement ps = null;
 
 		try {
-			String sql = "select * from user where USER_ID=?";
+			String sql = "select * from goods where GOODS_ID=?";
 			
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, id);
@@ -177,16 +178,16 @@ public class TESTSHOP_USERDao {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				u = new TESTSHOP_USER(
+				goods = new TESTSHOP_GOODS(
+						rs.getString("GOODS_ID"),
+						rs.getString("GOODS_NAME"),
+						rs.getString("GOODS_DESC"),
+						rs.getString("GOODS_IMG"),
+						rs.getString("GOODS_PRICE"),
+						rs.getString("GOODS_COUNT"),
+						rs.getString("GOODS_TYPE"),
 						rs.getString("USER_ID"),
-						rs.getString("USER_NAME"),
-						rs.getString("USER_PASSWORD"),
-						rs.getString("USER_ACCOUNT"),
-						rs.getString("USER_IDENTITY"),
-						rs.getString("USER_EMAIL"),
-						rs.getString("USER_STUNUM"),
-						rs.getString("USER_ADDRESS"),
-						rs.getString("USER_ICON")
+						rs.getString("USER_CONTACT")
 				);
 			}
 		} catch (Exception e) {
@@ -195,6 +196,6 @@ public class TESTSHOP_USERDao {
 			Basedao.closeall(rs, ps, conn);
 		}
 
-		return u;
+		return goods;
 	}
 }

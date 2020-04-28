@@ -8,12 +8,12 @@
 	<div class="crumb-wrap">
 		<div class="crumb-list">
 			<i class="icon-font"></i><a href="admin_index.jsp">首页</a><span
-				class="crumb-step">&gt;</span><span class="crumb-name">用户管理</span>
+				class="crumb-step">&gt;</span><span class="crumb-name">购物车管理</span>
 		</div>
 	</div>
 	<div class="search-wrap">
 		<div class="search-content">
-			<form action="/testshop/manage/admin_douserselect" method="get">
+			<form action="/testshop/manage/admin_docartselect" method="get">
 				<table class="search-tab">
 					<tr>
 						<!--  <th width="120">选择分类:</th>
@@ -32,11 +32,11 @@
 		</div>
 	</div>
 	<div class="result-wrap">
-		<form action="/testshop/manage/admin_douserdelete?page=${cpage}${search}" name="myform" id="myform" method="post">
+		<form action="/testshop/manage/admin_docartdelete?page=${cpage}${search}" name="myform" id="myform" method="post">
 			<div class="result-title">
 				<div class="result-list">
-					<a href="admin_useradd.jsp"><i class="icon-font"></i>新增用户</a>
-					<a id="batchDel" href="javascript:deleteBatch('你确定删除这些用户吗?', 'myform')"><i class="icon-font"></i>批量删除</a>
+					<a href="admin_cartadd.jsp"><i class="icon-font"></i>新增购物车</a>
+					<a id="batchDel" href="javascript:deleteBatch('你确定删除这些购物项吗?', 'myform')"><i class="icon-font"></i>批量删除</a>
 					<a id="updateOrd" href="javascript:void(0)"><i
 						class="icon-font"></i>更新排序</a>
 				</div>
@@ -46,36 +46,24 @@
 					<tr>
 						<th class="tc" width="5%"><input class="allChoose" name="" onclick="selectAll(this)" type="checkbox"></th>
 						<th>ID</th>
-						<th>用户昵称</th>
-						<th>账号</th>
-						<th>密码</th>
-						<th>身份</th>
-						<th>电子邮件</th>
-						<th>学号</th>
-						<th>居住地址</th>
-						<th>用户头像</th>
+						<th>卖家ID</th>
+						<th>商品ID</th>
+						<th>商品数量</th>
 						<th>操作</th>
 					</tr>
 
 
-					<c:forEach var="u" items="${userlist}">
+					<c:forEach var="cart" items="${cartlist}">
 						<tr>
-							<td class="tc"><input name="id[]" value="${u.USER_ID }" type="checkbox"></td>
-							<td>${u.USER_ID}</td>
-							<td>${u.USER_NAME}</td>
-							<td>${u.USER_ACCOUNT}</td>
-							<td>${u.USER_PASSWORD}</td>
-							<td>${u.USER_IDENTITY}</td>
-							<td>${u.USER_EMAIL}</td>
-							<td>${u.USER_STUNUM}</td>
-							<td>${u.USER_ADDRESS}</td>
-							<td>${u.USER_ICON}</td>
-
-
+							<td class="tc"><input name="id[]" value="${cart.CART_ID }" type="checkbox"></td>
+							<td>${cart.CART_ID}</td>
+							<td>${cart.USER_ID}</td>
+							<td>${cart.GOODS_ID}</td>
+							<td>${cart.GOODS_COUNT}</td>
 
 							<td>
-								<a class="link-update" href="admin_touserupdate?id=${u.USER_ID}&page=${cpage}${search}">修改</a> 
-								<a class="link-del" href="javascript:Delete('你确定要删除用户【${u.USER_NAME }】吗?', '/testshop/manage/admin_douserdelete?id=${u.USER_ID}&page=${cpage}${search}')">删除</a>
+								<a class="link-update" href="admin_tocartupdate?id=${cart.CART_ID}&page=${cpage}${search}">修改</a> 
+								<a class="link-del" href="javascript:Delete('你确定要删除购物车【${cart.CART_ID }】吗?', '/testshop/manage/admin_docartdelete?id=${cart.CART_ID}&page=${cpage}${search}')">删除</a>
 							</td>
 						</tr>
 					</c:forEach>
@@ -106,10 +94,10 @@
 				</table>
 				<div class="list-page">
 					一共${tsum} 条，当前 ${cpage} / ${tpage} <a
-						href="admin_douserselect?page=1${search} ">首页</a> <a
-						href="admin_douserselect?page=${cpage<=1?1:cpage-1}${search} ">上一页</a> <a
-						href="admin_douserselect?page=${cpage>=tpage?tpage:cpage+1}${search} ">下一页</a>
-					<a href="admin_douserselect?page=${tpage}${search} ">尾页</a>
+						href="admin_docartselect?page=1${search} ">首页</a> <a
+						href="admin_docartselect?page=${cpage<=1?1:cpage-1}${search} ">上一页</a> <a
+						href="admin_docartselect?page=${cpage>=tpage?tpage:cpage+1}${search} ">下一页</a>
+					<a href="admin_docartselect?page=${tpage}${search} ">尾页</a>
 
 				</div>
 			</div>
