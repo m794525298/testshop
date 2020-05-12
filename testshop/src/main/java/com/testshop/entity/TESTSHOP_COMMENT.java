@@ -1,0 +1,80 @@
+package com.testshop.entity;
+
+public class TESTSHOP_COMMENT {
+	private String COMMENT_ID;
+	private String COMMENT_TIME;
+	private String COMMENT_PARENT;
+	private String COMMENT_CONTENT;
+	private String COMMENT_GOODS_ID;
+	private String COMMENT_PUBLISHER;
+	private String COMMENT_GOODS_PUBLISHER;
+	
+	public TESTSHOP_COMMENT(String cOMMENT_ID, String cOMMENT_TIME, String cOMMENT_PARENT, String cOMMENT_CONTENT,
+			String cOMMENT_GOODS_ID, String cOMMENT_PUBLISHER, String cOMMENT_GOODS_PUBLISHER) {
+		super();
+		COMMENT_ID = cOMMENT_ID;
+		COMMENT_TIME = cOMMENT_TIME;
+		COMMENT_PARENT = cOMMENT_PARENT;
+		COMMENT_CONTENT = cOMMENT_CONTENT;
+		COMMENT_GOODS_ID = cOMMENT_GOODS_ID;
+		COMMENT_PUBLISHER = cOMMENT_PUBLISHER;
+		COMMENT_GOODS_PUBLISHER = cOMMENT_GOODS_PUBLISHER;
+	}
+
+	public String getCOMMENT_ID() {
+		return COMMENT_ID;
+	}
+
+	public void setCOMMENT_ID(String cOMMENT_ID) {
+		COMMENT_ID = cOMMENT_ID;
+	}
+
+	public String getCOMMENT_TIME() {
+		return COMMENT_TIME;
+	}
+
+	public void setCOMMENT_TIME(String cOMMENT_TIME) {
+		COMMENT_TIME = cOMMENT_TIME;
+	}
+
+	public String getCOMMENT_PARENT() {
+		return COMMENT_PARENT;
+	}
+
+	public void setCOMMENT_PARENT(String cOMMENT_PARENT) {
+		COMMENT_PARENT = cOMMENT_PARENT;
+	}
+
+	public String getCOMMENT_CONTENT() {
+		return COMMENT_CONTENT;
+	}
+
+	public void setCOMMENT_CONTENT(String cOMMENT_CONTENT) {
+		COMMENT_CONTENT = cOMMENT_CONTENT;
+	}
+
+	public String getCOMMENT_GOODS_ID() {
+		return COMMENT_GOODS_ID;
+	}
+
+	public void setCOMMENT_GOODS_ID(String cOMMENT_GOODS_ID) {
+		COMMENT_GOODS_ID = cOMMENT_GOODS_ID;
+	}
+
+	public String getCOMMENT_PUBLISHER() {
+		return COMMENT_PUBLISHER;
+	}
+
+	public void setCOMMENT_PUBLISHER(String cOMMENT_PUBLISHER) {
+		COMMENT_PUBLISHER = cOMMENT_PUBLISHER;
+	}
+
+	public String getCOMMENT_GOODS_PUBLISHER() {
+		return COMMENT_GOODS_PUBLISHER;
+	}
+
+	public void setCOMMENT_GOODS_PUBLISHER(String cOMMENT_GOODS_PUBLISHER) {
+		COMMENT_GOODS_PUBLISHER = cOMMENT_GOODS_PUBLISHER;
+	}
+	
+}
