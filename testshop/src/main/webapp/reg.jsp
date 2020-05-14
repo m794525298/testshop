@@ -1,53 +1,76 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>注册</title>
-    <link rel="stylesheet" type="text/css" href="css/public.css"/>
-    <link rel="stylesheet" type="text/css" href="css/login.css"/>
-	<script src="js/jquery-1.12.4.min.js"></script>
-		
+<meta charset="UTF-8">
+<title>注册</title>
+<link rel="stylesheet" type="text/css" href="css/public.css" />
+<link rel="stylesheet" type="text/css" href="css/login.css" />
+<script src="js/jquery-1.12.4.min.js"></script>
 
-	<style>
-.reg .reg_title{
-				width:80px;
-				
-				padding:0px 200px;
-				font-size:20px;
-				text-align:center;
-				
-			}
-.reg p .error{
-	display:inline-block;
-	padding:0px 20px;
-	height:25px;
-	line-height:25px;
-	color:#313131;
-	
+
+<style>
+.reg .reg_title {
+	width: 80px;
+	padding: 0px 200px;
+	font-size: 20px;
+	text-align: center;
 }
 
-	</style>
+.reg p .error {
+	display: inline-block;
+	padding: 0px 20px;
+	height: 25px;
+	line-height: 25px;
+	color: #313131;
+}
+</style>
 </head>
-<body><!-------------------reg-------------------------->
-<div class="reg">
-    <form action="#" method="post" id="reg_form"><h1><a href="index.html"><img src="img/temp/logo.png"></a></h1>
-        <p class="reg_title">用户注册</p>
-		<p><input type="text" name="userAccount" value="" placeholder="请输入账号" ><span class="error">请输入账号</span></p>
-       
-        <p><input type="password" name="userPassWord" value=""  placeholder="请输入密码"><span class="error">请输入密码</span></p>
-        <p><input type="password" name="rePassWord" value=""  placeholder="请确认密码"><span class="error">请确认密码</span></p>
-		<p><input type="text" name="email" id="email" value=""   placeholder="请输入邮箱"><span class="error">请输入邮箱</span></p>
-        <p class="txtL txt"><input class="code" name="code" type="text" placeholder="输入邮箱验证码" ><button  type="button" style="width:80px;height:40px; margin-left:10px;padding-top:6px;"
-              disable="" onclick=settime(this); >发送验证码</button><span></span></p>
-        <p><input type="submit" id="reg" name="" value="注册" disabled="disabled" ></p>
-        <p class="txtL txt">完成此注册，即表明您同意了我们的<a href="#">
-            <使用条款和隐私策略>
-        </a></p>
-        <p class="txt"><a href="#"><span></span>已有账号登录</a></p>
-        <!--<a href="#" class="off"><img src="img/temp/off.png"></a>--></form>
-</div>
+<body>
+	<!-------------------reg-------------------------->
+	<div class="reg">
+		<form action="#" method="post" id="reg_form">
+			<h1>
+				<a href="index.html"><img src="img/temp/logo.png"></a>
+			</h1>
+			<p class="reg_title">用户注册</p>
+			<p>
+				<input type="text" name="userAccount" value="" placeholder="请输入账号"><span
+					class="error">请输入账号</span>
+			</p>
+
+			<p>
+				<input type="password" name="userPassWord" value=""
+					placeholder="请输入密码"><span class="error">请输入密码</span>
+			</p>
+			<p>
+				<input type="password" name="rePassWord" value=""
+					placeholder="请确认密码"><span class="error">请确认密码</span>
+			</p>
+			<p>
+				<input type="text" name="email" id="email" value=""
+					placeholder="请输入邮箱"><span class="error">请输入邮箱</span>
+			</p>
+			<p class="txtL txt">
+				<input class="code" name="code" type="text" placeholder="输入邮箱验证码">
+				<button type="button"
+					style="width: 80px; height: 40px; margin-left: 10px; padding-top: 6px;"
+					disable="" onclick=settime(this);>发送验证码</button>
+				<span></span>
+			</p>
+			<p>
+				<input type="submit" id="reg" name="" value="注册" disabled="disabled">
+			</p>
+			<p class="txtL txt">
+				完成此注册，即表明您同意了我们的<a href="#"> <使用条款和隐私策略></a>
+			</p>
+			<p class="txt">
+				<a href="#"><span></span>已有账号登录</a>
+			</p>
+			<!--<a href="#" class="off"><img src="img/temp/off.png"></a>-->
+		</form>
+	</div>
 
 	<script>
 	 var countdown=60;
@@ -64,7 +87,7 @@
 			var account=$("input").eq(0).val(); 
 			var password=$("input").eq(1).val();
 			var email=$("input").eq(3).val();
-			var url="js/reg_userAccount.js?account="+account+"&password="+password+"&email="+email+"&username"+account;
+			var url="signup?account="+account+"&password="+password+"&email="+email+"&username"+account;
 			var args ={"time":new Date()};//这里是点击注册功能，对应接口文档功能四
 			$.getJSON(url,args,function(data){
 				if(data.success=="true"){
@@ -127,11 +150,10 @@
 			var c=$("#email").next().text();
 			var p_value=$("#email").val();
 			if(c==""){
-				var url="js/reg_userAccount.js?email="+p_value;//发送email按钮然后接受验证码
+				var url="getemailcaptcha?email="+p_value;	// 发送email按钮然后接受验证码
 				var args ={"time":new Date()};
 				$.getJSON(url,args,function(data){
 					email_code=data.captcha;
-					alert(email_code);
 				})
 			}
 		})
@@ -184,23 +206,23 @@
 					if(!(p_value.length>5&&p_value.length<17) ){
 					 	$(this).next().empty().append("请限定长度在6—16"); }
 					else(
-						$(function(){
-						var url="js/reg_userAccount.js?account="+p_value;//这里是验证账号验证是否重复的内容
-						var args ={"time":new Date()};
-						$.getJSON(url,args,function(data){
-						
-								if(data.exist!="true"){
-									$("input").eq(0).next().empty();
-								 	
-								}else{
-									
-									$("input").eq(0).next().empty().append("此账号已存在");
+							$(function(){
+								var url="checkaccount";// 这里是验证账号验证是否重复的内容
+								var args ={"time":new Date(),
+											"account":p_value};
+								$.getJSON(url,args,function(data){
 								
-								}
-							
-						})
-						
-						})
+										if(data.exist!="true"){
+											$("input").eq(0).next().empty();
+										 	
+										}else{
+											
+											$("input").eq(0).next().empty().append("此账号已存在");
+										
+										}	
+								})
+								
+								})
 						)}}
 			
 				checkbutton();
@@ -241,7 +263,6 @@
 				 			$(this).next().empty().append("请输入正确密码");
 				 		}
 				 	}
-			
 				}
 				checkbutton();
 				break;
@@ -255,7 +276,7 @@
 					$("input").eq(3).next().empty().append("格式不符合邮箱");
 				}else(
 						$(function(){
-						var url="js/reg_userAccount.js?email="+p_value;//查找邮箱是否存在，验证邮箱唯一
+						var url="checkemail?email="+p_value;	//查找邮箱是否存在，验证邮箱唯一
 						var args ={"time":new Date()};
 						$.getJSON(url,args,function(data){
 						
@@ -275,7 +296,7 @@
 				checkbutton();
 				break;
 				
-			case "code" :
+			case "code":
 				var p_value=this.value;
 				if(p_value==email_code){		
 					$(this).next().next().empty().append("ok")

@@ -24,7 +24,7 @@ public class TESTSHOP_COMMENTDao {
 				comment.getCOMMENT_GOODS_PUBLISHER()
 		};
 
-		return Basedao.exectuIUD(sql, params);
+		return Basedao.executeIUD(sql, params);
 	}
 	
 	public static int update(TESTSHOP_COMMENT comment) {
@@ -40,7 +40,7 @@ public class TESTSHOP_COMMENTDao {
 				comment.getCOMMENT_GOODS_PUBLISHER()
 		};
 
-		return Basedao.exectuIUD(sql, params);
+		return Basedao.executeIUD(sql, params);
 	}
 	
 	public static int delete(String id) {
@@ -48,7 +48,7 @@ public class TESTSHOP_COMMENTDao {
 		
 		Object[] params = {id};
 		
-		return Basedao.exectuIUD(sql, params);
+		return Basedao.executeIUD(sql, params);
 	}
 
 	/**

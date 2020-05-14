@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import com.testshop.dao.Basedao;
@@ -12,10 +13,9 @@ import com.testshop.entity.TESTSHOP_GOODS;
 
 public class TESTSHOP_GOODSDao {
 	public static int insert(TESTSHOP_GOODS goods) {
-		String sql = "insert into goods(GOODS_ID, GOODS_TYPE, GOODS_DESC, GOODS_TITLE, GOODS_PRICE, "
-				+ "GOODS_COUNT, GOODS_IMAGES, GOODS_ADDRESS, GOODS_CONTACT, GOODS_PUBLISHER) value(?,?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into goods(GOODS_ID, GOODS_TYPE, GOODS_DESC, GOODS_TITLE, GOODS_PRICE, GOODS_COUNT, GOODS_IMAGES, GOODS_ADDRESS, GOODS_CONTACT, GOODS_PUBLISHER) value(?,?,?,?,?,?,?,?,?,?)";
 
-		Object[] params = { null,
+		Object[] params1 = { null,
 				goods.getGOODS_TYPE(),
 				goods.getGOODS_DESC(),
 				goods.getGOODS_TITLE(),
@@ -26,8 +26,42 @@ public class TESTSHOP_GOODSDao {
 				goods.getGOODS_CONTACT(),
 				goods.getGOODS_PUBLISHER()
 		};
+		
+		int count =0;
+		Connection conn =Basedao.getconn();
+		
+		PreparedStatement ps =null;
+		
+		try{
+			ps =conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			for(int i=0;i<params1.length; i++){
+				ps.setObject(i+1,params1[i]);
+			}
+			count = ps.executeUpdate();
+			
+			ResultSet rs = ps.getGeneratedKeys();
+			
+			if(rs.next()) {
+				sql = "insert into goodsrecm value(?, now(), ?, 0)";
+				
+				Object[] params2 = {
+						rs.getInt(1),
+						goods.getGOODS_TYPE(),
+				};
+				
+				count = Basedao.executeIUD(sql, params2);
+			}
+			
+			
+			
+		} catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			Basedao.closeall(null,ps,conn);
+		}
 
-		return Basedao.exectuIUD(sql, params);
+		
+		return count;
 	}
 	
 	public static int update(TESTSHOP_GOODS goods) {
@@ -47,16 +81,20 @@ public class TESTSHOP_GOODSDao {
 				goods.getGOODS_PUBLISHER(),
 				goods.getGOODS_ID()
 		};
-
-		return Basedao.exectuIUD(sql, params);
+		
+		return Basedao.executeIUD(sql, params);
 	}
 	
 	public static int delete(String id) {
-		String sql = "delete from goods where GOODS_ID=?";
+		String sql = "delete from goodsrecm where GOODSRECM_ID=?";
 		
 		Object[] params = {id};
 		
-		return Basedao.exectuIUD(sql, params);
+		Basedao.executeIUD(sql, params);
+		
+		sql = "delete from goods where GOODS_ID=?";
+		
+		return Basedao.executeIUD(sql, params);
 	}
 	
 	/**

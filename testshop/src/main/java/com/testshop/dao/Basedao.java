@@ -23,14 +23,14 @@ public class Basedao {
 		Connection conn =null;
 		
 		try{
-//			conn = ;
+			// conn = ;
 		} catch(SQLException e){
 			e.printStackTrace();
 		}
 		return conn;
 	};
 	
-	public static int exectuIUD(String sql,Object[] params){
+	public static int executeIUD(String sql,Object[] params){
 		int count =0;
 		Connection conn =Basedao.getconn();
 		

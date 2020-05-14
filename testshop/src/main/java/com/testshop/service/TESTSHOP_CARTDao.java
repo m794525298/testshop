@@ -20,7 +20,7 @@ public class TESTSHOP_CARTDao {
 				cart.getCART_USER_ID(),
 				cart.getCART_GOODS_ID()
 		};
-		return Basedao.exectuIUD(sql, params);
+		return Basedao.executeIUD(sql, params);
 	}
 	
 	public static int update(TESTSHOP_CART cart) {
@@ -33,7 +33,7 @@ public class TESTSHOP_CARTDao {
 				cart.getCART_ID()
 		};
 
-		return Basedao.exectuIUD(sql, params);
+		return Basedao.executeIUD(sql, params);
 	}
 	
 	public static int delete(String id) {
@@ -41,7 +41,7 @@ public class TESTSHOP_CARTDao {
 		
 		Object[] params = {id};
 		
-		return Basedao.exectuIUD(sql, params);
+		return Basedao.executeIUD(sql, params);
 	}
 
 	/**

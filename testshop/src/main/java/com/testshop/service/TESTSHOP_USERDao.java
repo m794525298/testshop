@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.alibaba.fastjson.JSONObject;
 import com.testshop.dao.Basedao;
 import com.testshop.entity.TESTSHOP_USER;
 
@@ -27,7 +28,7 @@ public class TESTSHOP_USERDao {
 				u.getUSER_IDENTITY(),
 		};
 
-		return Basedao.exectuIUD(sql, params);
+		return Basedao.executeIUD(sql, params);
 	}
 	
 	public static int update(TESTSHOP_USER u) {
@@ -47,7 +48,7 @@ public class TESTSHOP_USERDao {
 				u.getUSER_ID()
 		};
 
-		return Basedao.exectuIUD(sql, params);
+		return Basedao.executeIUD(sql, params);
 	}
 	
 	public static int delete(String id) {
@@ -55,7 +56,7 @@ public class TESTSHOP_USERDao {
 		
 		Object[] params = {id};
 		
-		return Basedao.exectuIUD(sql, params);
+		return Basedao.executeIUD(sql, params);
 	}
 
 	/**
@@ -203,5 +204,53 @@ public class TESTSHOP_USERDao {
 		}
 
 		return u;
+	}
+
+
+	public static int selectByAccount(String account) {
+		int count = 0;
+		Connection conn = Basedao.getconn();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "select count(*) from user where USER_ACCOUNT=?";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, account);
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				count = rs.getInt(1);
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		return count;
+	}
+
+	public static int selectByEmail(String email) {
+		int count = 0;
+		Connection conn = Basedao.getconn();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "select count(*) from user where USER_EMAIL=?";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, email);
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				count = rs.getInt(1);
+				System.out.println(count);
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		return count;
 	}
 }

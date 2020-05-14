@@ -28,12 +28,12 @@
     </div>
 </div><!------------------------------thImg------------------------------>
 <div class="thImg">
-    <div class="clearfix"><a href="vase_proList.html"><img src="img/i1.jpg"/></a><a href="proList.html"><img
-            src="img/i2.jpg"/></a><a href="#2"><img src="img/i3.jpg"/></a></div>
+    <div class="clearfix"><a href="search.jsp?type=1"><img src="img/i1.jpg"/></a><a href="search.jsp?type=2"><img
+            src="img/i2.jpg"/></a><a href="search.jsp?type=3"><img src="img/i3.jpg"/></a></div>
 </div><!------------------------------news------------------------------>
 <div class="news">
     <div class="wrapper"><h2><img src="img/ih1.jpg"/></h2>
-        <div class="top clearfix" id="good_stydy_top">
+        <div class="top clearfix" id="good_study_top">
       <!--   <a href="proDetail.html"><img src="img/n1.jpg"/>
             <p></p></a>
             
@@ -42,32 +42,35 @@
             
             <a href="proDetail.html"><img src="img/n3.jpg"/>
             <p></p></a> --></div>
-        <div class="bott clearfix" id="good_stydy_bot">
+        <div class="bott clearfix" id="good_study_bot">
         	<!-- <a href="proDetail.html"><img src="img/n4.jpg"/>
             <p></p></a><a href="proDetail.html"><img src="img/n5.jpg"/>
             <p></p></a><a href="proDetail.html"><img src="img/n6.jpg"/>
             <p></p></a> --></div>
         <h2><img src="img/ih2.jpg"/></h2>
-        <div class="flower clearfix tran"><a href="proDetail.html" class="clearfix">
+        <div class="flower clearfix tran" id="good_dailyuse_top">
+        <!-- <a href="proDetail.html" class="clearfix">
             <dl>
                 <dt><span class="abl"></span><img src="img/flo1.jpg"/><span class="abr"></span></dt>
                 <dd>【花艺】七头美丽玫瑰仿真花束</dd>
                 <dd><span>¥ 79.00</span></dd>
             </dl>
-        </a><a href="proDetail.html">
+        </a>
+        <a href="proDetail.html">
             <dl>
                 <dt><span class="abl"></span><img src="img/flo2.jpg"/><span class="abr"></span></dt>
                 <dd>【花艺】七头美丽玫瑰仿真花束</dd>
                 <dd><span>¥ 79.00</span></dd>
             </dl>
-        </a><a href="proDetail.html">
+        </a>
+        <a href="proDetail.html">
             <dl>
                 <dt><span class="abl"></span><img src="img/flo3.jpg"/><span class="abr"></span></dt>
                 <dd>【花艺】七头美丽玫瑰仿真花束</dd>
                 <dd><span>¥ 79.00</span></dd>
             </dl>
-        </a></div>
-        <div class="flower clearfix tran"><a href="proDetail.html">
+        </a> --></div>
+        <div class="flower clearfix tran" id="good_dailyuse_bot"><!-- <a href="proDetail.html">
             <dl>
                 <dt><span class="abl"></span><img src="img/flo4.jpg"/><span class="abr"></span></dt>
                 <dd>【花艺】七头美丽玫瑰仿真花束</dd>
@@ -85,14 +88,14 @@
                 <dd>【花艺】七头美丽玫瑰仿真花束</dd>
                 <dd><span>¥ 79.00</span></dd>
             </dl>
-        </a></div>
+        </a> --></div>
     </div>
 </div><!------------------------------ad------------------------------><a href="#" class="ad"><img
         src="img/ib1.jpg"/></a><!------------------------------people------------------------------>
 <div class="people">
     <div class="wrapper"><h2><img src="img/ih3.jpg"/></h2>
-        <div class="pList clearfix tran"><a href="proDetail.html">
-            <dl>
+        <div class="pList clearfix tran" id="goods_eat_top"><a href="proDetail.html">
+            <!-- <dl>
                 <dt><span class="abl"></span><img src="img/s7.jpg"/><span class="abr"></span></dt>
                 <dd>【最家】不锈钢壁饰墙饰软装</dd>
                 <dd><span>￥688.00</span></dd>
@@ -115,9 +118,9 @@
                 <dd>【最家】金属树枝壁饰铜鸟装饰品</dd>
                 <dd><span>￥928.00</span></dd>
             </dl>
-        </a></div>
-        <div class="pList clearfix tran"><a href="proDetail.html">
-            <dl>
+        </a> --></div>
+        <div class="pList clearfix tran" id="goods_eat_bot"><a href="proDetail.html">
+           <!--  <dl>
                 <dt><span class="abl"></span><img src="img/s6.jpg"/><span class="abr"></span></dt>
                 <dd>【最家】金属壁饰创意背景墙面挂件创意</dd>
                 <dd><span>￥228.00</span></dd>
@@ -140,7 +143,7 @@
                 <dd>【最家】客厅地中海欧式现代相片墙创意</dd>
                 <dd><span>￥59.80</span></dd>
             </dl>
-        </a></div>
+        </a> --></div>
         
     </div>
 </div><!--返回顶部-->
@@ -184,7 +187,7 @@
 <script src="js/jquery-1.12.4.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/public.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/nav.js" type="text/javascript" charset="utf-8"></script>
-	<script src="js/jquery-1.12.4.min.js"></script>
+<script src="js/jquery-1.12.4.min.js"></script>
 <script src="js/jquery.flexslider-min.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
@@ -201,34 +204,24 @@ $(function () {
         useCSS: false
     });
 });
-$(function(){
-	
-	if($.cookie('userID')){
-		var username=storage.getItem('username');
-	$(".fl").eq(1).empty().append("<a href='#' id='login'>欢迎 "+username+"</a>");
-		
-	}
-		
-	var userID=$.cookie('userID');
-	
-		var uid = storage.getItem('icon');
-		
-})
+
 $(function(){
 
-	var url="js/index.json";
+	var url="js/index.js";//这里是主页的功能，显示主页内容  把这个url改成主页
 	var args ={"time":new Date()};
-	/* $(".top clearfix").append("<a href="+href+"><img src="+img+"/><p></p></a>");  */
+	
 	
 	$.getJSON(url,args,function(data){
-		$("#good_stydy_top").empty()
+		
+		$("#good_study_top").empty();
+		$("#good_study_bot").empty();
 			for(i=0;i<3;i++){
 				
 				var href='goods_detail.jsp?goodsID='+data.goods.goods_study[i].goodsID;
 				var img=data.goods.goods_study[i].cover;
 				
 				
-				 $("#good_stydy_top").append("<a href="+href+"><img src="+img+"><p></p></a>"); 
+				 $("#good_study_top").append("<a href="+href+"><img src="+img+"><p></p></a>"); 
 				
 		}
 		for(i=3;i<6;i++){
@@ -237,9 +230,80 @@ $(function(){
 			var img=data.goods.goods_study[i].cover;
 			
 			
-			 $("#good_stydy_bot").append("<a href="+href+"><img src="+img+"><p></p></a>"); 
+			 $("#good_study_bot").append("<a href="+href+"><img src="+img+"><p></p></a>"); 
 			
 	}
+		$("#good_dailyuse_top").empty();
+		$("#good_dailyuse_bot").empty();
+			for(i=0;i<3;i++){
+				
+				var href='goods_detail.jsp?goodsID='+data.goods.goods_study[i].goodsID;
+				var img=data.goods.goods_dailyuse[i].cover;
+				var title=data.goods.goods_dailyuse[i].title;
+				var price=data.goods.goods_dailyuse[i].price;
+				
+				
+				 $("#good_dailyuse_top").append("  <a href="+href+" class='clearfix'>"+
+				            "<dl>"+
+	                "<dt><span class='abl'></span><img src="+img+"><span class='abr'></span></dt>"+
+	                "<dd>"+title+"</dd>"+
+	                "<dd><span>￥"+price+"</span></dd>"+
+	        " </dl>"+
+	           "</a>"); 
+				
+		}
+		for(i=3;i<6;i++){
+			
+			var href='goods_detail.jsp?goodsID='+data.goods.goods_dailyuse[i].goodsID;
+			var img=data.goods.goods_dailyuse[i].cover;
+			var title=data.goods.goods_dailyuse[i].title;
+			var price=data.goods.goods_dailyuse[i].price;
+			
+			 $("#good_dailyuse_bot").append("  <a href="+href+" class='clearfix'>"+
+			            "<dl>"+
+             "<dt><span class='abl'></span><img src="+img+"><span class='abr'></span></dt>"+
+             "<dd>"+title+"</dd>"+
+             "<dd><span>￥"+price+"</span></dd>"+
+     " </dl>"+
+        "</a>"); 
+			
+	}
+		$("#goods_eat_top").empty();
+		$("#goods_eat_bot").empty();
+			for(i=0;i<4;i++){
+				
+				var href='goods_detail.jsp?goodsID='+data.goods.goods_eat[i].goodsID;
+				var img=data.goods.goods_eat[i].cover;
+				var title=data.goods.goods_eat[i].title;
+				var price=data.goods.goods_eat[i].price;
+				
+				
+				 $("#goods_eat_top").append("<a href="+href+">"+
+				            "<dl>"+
+	             "<dt><span class='abl'></span><img src="+img+"><span class='abr'></span></dt>"+
+	             "<dd>"+title+"</dd>"+
+	             "<dd><span>￥"+price+"</span></dd>"+
+	         "</dl>"+
+	    "</a>"); 
+				
+		}
+		for(i=4;i<8;i++){
+			
+			var href='goods_detail.jsp?goodsID='+data.goods.goods_eat[i].goodsID;
+			var img=data.goods.goods_eat[i].cover;
+			var title=data.goods.goods_eat[i].title;
+			var price=data.goods.goods_eat[i].price;
+			
+			 $("#goods_eat_bot").append("<a href="+href+">"+
+			            "<dl>"+
+             "<dt><span class='abl'></span><img src="+img+"><span class='abr'></span></dt>"+
+             "<dd>"+title+"</dd>"+
+             "<dd><span>￥"+price+"</span></dd>"+
+         "</dl>"+
+    "</a>"); 
+			
+	}
+		
 		
 	}
 	)
